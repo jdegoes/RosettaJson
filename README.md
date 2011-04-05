@@ -22,7 +22,7 @@ The core module is JsonImplementation, defined in package rosetta.json.
 
     import rosetta.json.JsonImplementation
 
-This trait is parameterized by <pre>Json</pre>, which represents the supertype of all possible Json values.
+This trait is parameterized by `Json`, which represents the supertype of all possible Json values.
 
 You use this abstract type in your code, whether classes or traits:
 
