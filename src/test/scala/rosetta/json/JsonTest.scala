@@ -39,4 +39,17 @@ abstract class JsonTest[Json] extends Properties("Json") with ArbitraryJson[Json
       json.serialize[String].deserialize[Json] == json
     }
   }
+
+  def getForAllObjects = {
+    property("get for all objects") = forAll(genJsonObject) { (json: Json) =>
+      json match {
+        case JsonObject(map) =>
+          map.foldLeft(true == true) { (props, tuple) =>
+            val (name, value) = tuple
+
+            props && (json.get(name) == value)
+          }
+      }
+    }
+  }
 }

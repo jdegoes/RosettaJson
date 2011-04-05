@@ -29,4 +29,6 @@ object JsonDispatchTest extends JsonTest[JsValue] {
   val jsonImplementation = JsonDispatch
 
   invertibleSerializationForAllJson
+
+  getForAllObjects
 }

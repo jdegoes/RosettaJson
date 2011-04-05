@@ -155,7 +155,7 @@ trait JsonImplementation[Json] extends SerializerImplicits {
   object JsonObject {
     def apply(v: Iterable[(String, Json)]): Json = v.serialize[Json]
 
-    def unapply(json: Json): Option[Iterable[(String, Json)]] = foldJson[Option[Iterable[(String, Json)]]](json,
+    def unapply(json: Json): Option[Map[String, Json]] = foldJson[Option[Map[String, Json]]](json,
       (
         () => None,
         _ => None,
@@ -163,7 +163,7 @@ trait JsonImplementation[Json] extends SerializerImplicits {
         _ => None,
         _ => None,
         _ => None,
-        v => Some(v)
+        v => Some(v.toMap)
       )
     )
   }
@@ -184,19 +184,19 @@ trait JsonImplementation[Json] extends SerializerImplicits {
 
     def foldDown[Z](state: Z, f: (Z, Json) => Z): Z = foldJson(value, FoldFoldDown(state, f))
 
-    def get(name: String): Json = value match {
-      case JsonObject(map) =>
-        name.split("\\.").toList.filter(_.length > 0) match {
-          case Nil => value
+    def get(name: String): Json = name.split("[.]").toList.filter(_.length > 0) match {
+      case Nil => value
 
-          case f :: fs =>
-            map.find(_._1 == f) match {
-              case None             => JsonNull
-              case Some((_, value)) => value.get(fs.mkString("."))
+      case f :: fs =>
+        value match {
+          case JsonObject(map) =>
+            map.get(name) match {
+              case None        => JsonNull
+              case Some(value) => value.get(fs.mkString("."))
             }
-        }
 
-      case _ => JsonNull
+          case _ => JsonNull
+        }
     }
 
     override def toString = value.toString

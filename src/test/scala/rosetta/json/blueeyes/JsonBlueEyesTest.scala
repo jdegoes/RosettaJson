@@ -29,4 +29,6 @@ object JsonBlueEyesTest extends JsonTest[JValue] {
   val jsonImplementation = JsonBlueEyes
 
   invertibleSerializationForAllJson
+
+  getForAllObjects
 }

@@ -71,9 +71,10 @@ trait ArbitraryJson[Json] {
 
   def genJsonField: Gen[(String, Json)] = {
     for {
-      name  <- arbitrary[String]
-      value <- arbitrary[Json]
-    } yield (name, value)
+      prefix <- identifier
+      suffix <- arbitrary[String]
+      value  <- arbitrary[Json]
+    } yield (prefix + suffix, value)
   }
 
   def genJsonObject: Gen[Json] = {

@@ -31,4 +31,6 @@ object JsonLiftTest extends JsonTest[JValue] {
   import jsonImplementation._
 
   invertibleSerializationForObjectsAndArrays
+
+  getForAllObjects
 }
