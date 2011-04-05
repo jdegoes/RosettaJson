@@ -85,9 +85,11 @@ You can also create and pattern match against the following pseudo-types:
   * JsonArray
   * JsonObject
 
-    json match {
-      case JsonObject(fields) => JsonObject(fields.map(_._1 != "forbidden"))
-    }
+<pre>
+json match {
+  case JsonObject(fields) => JsonObject(fields.map(_._1 != "forbidden"))
+}
+</pre>
 
 Thanks to a pimp, you may also invoke a variety of methods directly on Json values:
 
