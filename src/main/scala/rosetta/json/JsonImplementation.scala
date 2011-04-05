@@ -131,14 +131,14 @@ trait JsonImplementation[Json] extends SerializerImplicits {
   object JsonArray {
     def apply(v: Iterable[Json]): Json = v.serialize
 
-    def unapply(json: Json): Option[List[Json]] = foldJson[Option[List[Json]]](json,
+    def unapply(json: Json): Option[Iterable[Json]] = foldJson[Option[Iterable[Json]]](json,
       (
         () => None,
         _ => None,
         _ => None,
         _ => None,
         _ => None,
-        v => Some(v.toList),
+        v => Some(v),
         _ => None
       )
     )
@@ -147,7 +147,7 @@ trait JsonImplementation[Json] extends SerializerImplicits {
   object JsonObject {
     def apply(v: Iterable[(String, Json)]): Json = v.serialize
 
-    def unapply(json: Json): Option[Map[String, Json]] = foldJson[Option[Map[String, Json]]](json,
+    def unapply(json: Json): Option[Iterable[(String, Json)]] = foldJson[Option[Iterable[(String, Json)]]](json,
       (
         () => None,
         _ => None,
@@ -155,7 +155,7 @@ trait JsonImplementation[Json] extends SerializerImplicits {
         _ => None,
         _ => None,
         _ => None,
-        v => Some(Map.empty ++ v)
+        v => Some(v)
       )
     )
   }
@@ -182,9 +182,9 @@ trait JsonImplementation[Json] extends SerializerImplicits {
           case Nil => value
 
           case f :: fs =>
-            map.get(f) match {
-              case None        => JsonNull
-              case Some(value) => value.get(fs.mkString("."))
+            map.find(_._1 == f) match {
+              case None             => JsonNull
+              case Some((_, value)) => value.get(fs.mkString("."))
             }
         }
 
