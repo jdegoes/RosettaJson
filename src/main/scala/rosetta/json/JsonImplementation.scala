@@ -20,53 +20,49 @@
  */
 package rosetta.json
 
+import rosetta.io.{Serializer, SerializerImplicits}
+
 /** Represents the bundle of functionality necessary to work with a given
  * JSON library.
  */
-trait JsonImplementation[Json] {
+trait JsonImplementation[Json] extends SerializerImplicits {
+  type JsonSerializer[A] = Serializer[A, Json]
+
   // *************** BEGIN IMPLEMENTATION ***************
-  implicit val BooleanSerializer: Serializer[Boolean]
+  val JsonStringSerializer: Serializer[Json, String]
 
-  implicit val StringSerializer: Serializer[String]
+  implicit val BooleanJsonSerializer: JsonSerializer[Boolean]
 
-  implicit val LongSerializer: Serializer[Long]
+  implicit val StringJsonSerializer: JsonSerializer[String]
 
-  implicit val DoubleSerializer: Serializer[Double]
+  implicit val LongJsonSerializer: JsonSerializer[Long]
 
-  implicit def ObjectSerializer[A](implicit serializer: Serializer[A]): Serializer[Iterable[(String, A)]]
+  implicit val DoubleJsonSerializer: JsonSerializer[Double]
 
-  implicit def ArraySerializer[A](implicit serializer: Serializer[A]): Serializer[Iterable[A]]
+  implicit def ObjectJsonSerializer[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Iterable[(String, A)]]
 
-  implicit def OptionSerializer[A](implicit serializer: Serializer[A]): Serializer[Option[A]]
+  implicit def ArrayJsonSerializer[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Iterable[A]]
+
+  implicit def OptionJsonSerializer[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Option[A]]
 
   def foldJson[Z](json: Json, matcher: JsonMatcher[Z]): Z
 
   // *************** END IMPLEMENTATION ***************
-  implicit val JsonSerializer: Serializer[Json] = new Serializer[Json] {
+  implicit val IdentityJsonSerializer: JsonSerializer[Json] = new JsonSerializer[Json] {
     def serialize(v: Json): Json = v
 
     def deserialize(v: Json): Json = v
   }
 
-  val EmptyObject = ObjectSerializer[Boolean].serialize(Nil)
-  val EmptyArray  = ArraySerializer[Boolean].serialize(Nil)
+  val EmptyObject = ObjectJsonSerializer[Boolean].serialize(Nil)
+  val EmptyArray  = ArrayJsonSerializer[Boolean].serialize(Nil)
 
   type JsonMatcher[Z] = (() => Z, Boolean => Z, Long => Z, Double => Z, String => Z, Iterable[Json] => Z, Iterable[(String, Json)] => Z)
-
-  trait Serializer[A] {
-    def serialize(v: A): Json
-
-    def deserialize(v: Json): A
-  }
-
-  implicit final def anyToSerializable[A: Serializer](a: A) = new {
-    def serialize: Json = implicitly[Serializer[A]].serialize(a)
-  }
 
   implicit final def jsonToPimpedType(json: Json): PimpedJson = new PimpedJson(json)
   implicit final def pimpedTypeToJson(pimp: PimpedJson): Json = pimp.value
 
-  val JsonNull = OptionSerializer[Boolean].serialize(None)
+  val JsonNull = OptionJsonSerializer[Boolean].serialize(None)
 
   object JsonBool {
     def apply(v: Boolean) = v.serialize
@@ -165,8 +161,6 @@ trait JsonImplementation[Json] {
   }
 
   case class PimpedJson(value: Json) {
-    def deserialize[A: Serializer]: A = implicitly[Serializer[A]].deserialize(value)
-
     def fold[Z](ifNull: => Z, ifBool: Boolean => Z, ifLong: Long => Z, ifDouble: Double => Z, ifString: String => Z, ifArray: Iterable[Json] => Z, ifObject: Iterable[(String, Json)] => Z): Z = {
       foldJson[Z](
         json    = value,
@@ -207,7 +201,7 @@ trait JsonImplementation[Json] {
     v => f(v.serialize),
     v => f(v.serialize),
     v => {
-      val as = ArraySerializer(JsonSerializer)
+      val as = ArrayJsonSerializer(IdentityJsonSerializer)
 
       val mapped = as.deserialize(f(as.serialize(v)))
 
@@ -216,7 +210,7 @@ trait JsonImplementation[Json] {
       })
     },
     v => {
-      val os = ObjectSerializer(JsonSerializer)
+      val os = ObjectJsonSerializer(IdentityJsonSerializer)
 
       val mapped = os.deserialize(f(os.serialize(v)))
 
@@ -235,14 +229,14 @@ trait JsonImplementation[Json] {
     v => f(v.serialize),
     v => f(v.serialize),
     v => {
-      val as = ArraySerializer(JsonSerializer)
+      val as = ArrayJsonSerializer(IdentityJsonSerializer)
 
       f(as.serialize(v.map { element =>
         foldJson[Json](element, FoldMapUp(f))
       }))
     },
     v => {
-      val os = ObjectSerializer(JsonSerializer)
+      val os = ObjectJsonSerializer(IdentityJsonSerializer)
 
       f(os.serialize(v.map { tuple =>
         val (name, value) = tuple
@@ -259,7 +253,7 @@ trait JsonImplementation[Json] {
     v => f(state, v.serialize),
     v => f(state, v.serialize),
     v => {
-      val as = ArraySerializer(JsonSerializer)
+      val as = ArrayJsonSerializer(IdentityJsonSerializer)
 
       val newState = f(state, as.serialize(v))
 
@@ -268,7 +262,7 @@ trait JsonImplementation[Json] {
       }
     },
     v => {
-      val os = ObjectSerializer(JsonSerializer)
+      val os = ObjectJsonSerializer(IdentityJsonSerializer)
 
       val newState = f(state, os.serialize(v))
 
@@ -287,7 +281,7 @@ trait JsonImplementation[Json] {
     v => f(state, v.serialize),
     v => f(state, v.serialize),
     v => {
-      val as = ArraySerializer(JsonSerializer)
+      val as = ArrayJsonSerializer(IdentityJsonSerializer)
 
       val newState = v.foldLeft(state) { (state, element) =>
         foldJson[Z](element, FoldFoldUp[Z](state, f))
@@ -296,7 +290,7 @@ trait JsonImplementation[Json] {
       f(newState, as.serialize(v))
     },
     v => {
-      val os = ObjectSerializer(JsonSerializer)
+      val os = ObjectJsonSerializer(IdentityJsonSerializer)
 
       val newState = v.foldLeft(state) { (state, field) =>
         val (name, value) = field

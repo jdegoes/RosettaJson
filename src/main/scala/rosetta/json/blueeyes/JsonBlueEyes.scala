@@ -21,25 +21,32 @@
 package rosetta.json.blueeyes
 
 import blueeyes.json.JsonAST._
+import blueeyes.json.Printer._
+import blueeyes.json.JsonParser._
 import blueeyes.json.xschema.DefaultSerialization._
 
 import rosetta.json._
 
 trait JsonBlueEyes extends JsonImplementation[JValue] {
+  val JsonStringSerializer: rosetta.io.Serializer[JValue, String] = new rosetta.io.Serializer[JValue, String] {
+    def serialize(v: JValue): String = compact(render(v))
 
-  implicit val BooleanSerializer: Serializer[Boolean] = new Serializer[Boolean] {
+    def deserialize(v: String): JValue = parse(v)
+  }
+
+  implicit val BooleanJsonSerializer: JsonSerializer[Boolean] = new JsonSerializer[Boolean] {
     def serialize(v: Boolean): JValue = JBool(v)
 
     def deserialize(v: JValue): Boolean = (v --> classOf[JBool]).value
   }
 
-  implicit val StringSerializer: Serializer[String] = new Serializer[String] {
+  implicit val StringJsonSerializer: JsonSerializer[String] = new JsonSerializer[String] {
     def serialize(v: String): JValue = JString(v)
 
     def deserialize(v: JValue): String = (v --> classOf[JString]).value
   }
 
-  implicit val LongSerializer: Serializer[Long] = new Serializer[Long] {
+  implicit val LongJsonSerializer: JsonSerializer[Long] = new JsonSerializer[Long] {
     def serialize(v: Long): JValue = JInt(v)
 
     def deserialize(v: JValue): Long = v match {
@@ -50,7 +57,7 @@ trait JsonBlueEyes extends JsonImplementation[JValue] {
     }
   }
 
-  implicit val DoubleSerializer: Serializer[Double] = new Serializer[Double] {
+  implicit val DoubleJsonSerializer: JsonSerializer[Double] = new JsonSerializer[Double] {
     def serialize(v: Double): JValue = JDouble(v)
 
     def deserialize(v: JValue): Double = v match {
@@ -61,7 +68,7 @@ trait JsonBlueEyes extends JsonImplementation[JValue] {
     }
   }
 
-  implicit def ObjectSerializer[A](implicit serializer: Serializer[A]): Serializer[Iterable[(String, A)]] = new Serializer[Iterable[(String, A)]] {
+  implicit def ObjectJsonSerializer[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Iterable[(String, A)]] = new JsonSerializer[Iterable[(String, A)]] {
     def serialize(v: Iterable[(String, A)]): JValue = JObject(v.toList.map { field =>
       JField(field._1, serializer.serialize(field._2))
     })
@@ -75,7 +82,7 @@ trait JsonBlueEyes extends JsonImplementation[JValue] {
     }
   }
 
-  implicit def ArraySerializer[A](implicit serializer: Serializer[A]): Serializer[Iterable[A]] = new Serializer[Iterable[A]] {
+  implicit def ArrayJsonSerializer[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Iterable[A]] = new JsonSerializer[Iterable[A]] {
     def serialize(v: Iterable[A]): JValue = JArray(v.toList.map(serializer.serialize _))
 
     def deserialize(v: JValue): Iterable[A] = v match {
@@ -85,7 +92,7 @@ trait JsonBlueEyes extends JsonImplementation[JValue] {
     }
   }
 
-  implicit def OptionSerializer[A](implicit serializer: Serializer[A]): Serializer[Option[A]] = new Serializer[Option[A]] {
+  implicit def OptionJsonSerializer[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Option[A]] = new JsonSerializer[Option[A]] {
     def serialize(v: Option[A]): JValue = v match {
       case None => JNull
 

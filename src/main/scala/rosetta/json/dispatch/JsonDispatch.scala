@@ -25,7 +25,13 @@ import dispatch.json._
 import rosetta.json._
 
 trait JsonDispatch extends JsonImplementation[JsValue] {
-  implicit val BooleanSerializer: Serializer[Boolean] = new Serializer[Boolean] {
+  val JsonStringSerializer: rosetta.io.Serializer[JsValue, String] = new rosetta.io.Serializer[JsValue, String] {
+    def serialize(v: JsValue): String = JsValue.toJson(v)
+
+    def deserialize(v: String): JsValue = JsValue.fromString(v)
+  }
+
+  implicit val BooleanJsonSerializer: JsonSerializer[Boolean] = new JsonSerializer[Boolean] {
     def serialize(v: Boolean): JsValue = if (v) JsTrue else JsFalse
 
     def deserialize(v: JsValue): Boolean = v match {
@@ -35,7 +41,7 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
     }
   }
 
-  implicit val StringSerializer: Serializer[String] = new Serializer[String] {
+  implicit val StringJsonSerializer: JsonSerializer[String] = new JsonSerializer[String] {
     def serialize(v: String): JsValue = JsString(v)
 
     def deserialize(v: JsValue): String = v match {
@@ -45,7 +51,7 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
     }
   }
 
-  implicit val LongSerializer: Serializer[Long] = new Serializer[Long] {
+  implicit val LongJsonSerializer: JsonSerializer[Long] = new JsonSerializer[Long] {
     def serialize(v: Long): JsValue = JsNumber(v)
 
     def deserialize(v: JsValue): Long = v match {
@@ -55,7 +61,7 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
     }
   }
 
-  implicit val DoubleSerializer: Serializer[Double] = new Serializer[Double] {
+  implicit val DoubleJsonSerializer: JsonSerializer[Double] = new JsonSerializer[Double] {
     def serialize(v: Double): JsValue = JsNumber(v)
 
     def deserialize(v: JsValue): Double = v match {
@@ -65,12 +71,12 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
     }
   }
 
-  implicit def ObjectSerializer[A](implicit serializer: Serializer[A]): Serializer[Iterable[(String, A)]] = new Serializer[Iterable[(String, A)]] {
-    def serialize(v: Iterable[(String, A)]): JsValue = JsObject(Map(v.toList.map { field =>
+  implicit def ObjectJsonSerializer[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Iterable[(String, A)]] = new JsonSerializer[Iterable[(String, A)]] {
+    def serialize(v: Iterable[(String, A)]): JsValue = JsObject(v.toList.map { field =>
       val (name, value) = field
 
       (JsString(name), serializer.serialize(value))
-    }: _*))
+    }.toMap)
 
     def deserialize(v: JsValue): Iterable[(String, A)] = v match {
       case JsObject(fields) => fields.map { field =>
@@ -83,7 +89,7 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
     }
   }
 
-  implicit def ArraySerializer[A](implicit serializer: Serializer[A]): Serializer[Iterable[A]] = new Serializer[Iterable[A]] {
+  implicit def ArrayJsonSerializer[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Iterable[A]] = new JsonSerializer[Iterable[A]] {
     def serialize(v: Iterable[A]): JsValue = JsArray(v.toList.map(serializer.serialize _))
 
     def deserialize(v: JsValue): Iterable[A] = v match {
@@ -93,7 +99,7 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
     }
   }
 
-  implicit def OptionSerializer[A](implicit serializer: Serializer[A]): Serializer[Option[A]] = new Serializer[Option[A]] {
+  implicit def OptionJsonSerializer[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Option[A]] = new JsonSerializer[Option[A]] {
     def serialize(v: Option[A]): JsValue = v match {
       case None => JsNull
 
