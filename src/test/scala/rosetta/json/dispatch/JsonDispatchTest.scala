@@ -31,4 +31,8 @@ object JsonDispatchTest extends JsonTest[JsValue] {
   invertibleSerializationForAllJson
 
   getForAllObjects
+
+  mapDownWithIdentity
+
+  mapUpWithIdentity
 }

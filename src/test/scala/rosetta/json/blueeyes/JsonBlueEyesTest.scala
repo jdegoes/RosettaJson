@@ -31,4 +31,8 @@ object JsonBlueEyesTest extends JsonTest[JValue] {
   invertibleSerializationForAllJson
 
   getForAllObjects
+
+  mapDownWithIdentity
+
+  mapUpWithIdentity
 }

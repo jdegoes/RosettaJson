@@ -52,4 +52,16 @@ abstract class JsonTest[Json] extends Properties("Json") with ArbitraryJson[Json
       }
     }
   }
+
+  def mapDownWithIdentity = {
+    property("mapDown with identity") = forAll { (json: Json) =>
+      json.mapDown(j => j) == json
+    }
+  }
+
+  def mapUpWithIdentity = {
+    property("mapUp with identity") = forAll { (json: Json) =>
+      json.mapUp(j => j) == json
+    }
+  }
 }

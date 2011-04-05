@@ -33,4 +33,8 @@ object JsonLiftTest extends JsonTest[JValue] {
   invertibleSerializationForObjectsAndArrays
 
   getForAllObjects
+
+  mapDownWithIdentity
+
+  mapUpWithIdentity
 }
