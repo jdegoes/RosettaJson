@@ -25,12 +25,10 @@ import dispatch.json._
 import rosetta.json._
 
 trait JsonDispatch extends JsonImplementation[JsValue] {
-  type Json = JsValue
-
   implicit val BooleanSerializer: Serializer[Boolean] = new Serializer[Boolean] {
-    def serialize(v: Boolean): Json = if (v) JsTrue else JsFalse
+    def serialize(v: Boolean): JsValue = if (v) JsTrue else JsFalse
 
-    def deserialize(v: Json): Boolean = v match {
+    def deserialize(v: JsValue): Boolean = v match {
       case JsBoolean(v) => v
 
       case _ => error("Expected Boolean but found: " + v)
@@ -38,9 +36,9 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
   }
 
   implicit val StringSerializer: Serializer[String] = new Serializer[String] {
-    def serialize(v: String): Json = JsString(v)
+    def serialize(v: String): JsValue = JsString(v)
 
-    def deserialize(v: Json): String = v match {
+    def deserialize(v: JsValue): String = v match {
       case JsString(v) => v
 
       case _ => error("Expected String but found: " + v)
@@ -48,9 +46,9 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
   }
 
   implicit val LongSerializer: Serializer[Long] = new Serializer[Long] {
-    def serialize(v: Long): Json = JsNumber(v)
+    def serialize(v: Long): JsValue = JsNumber(v)
 
-    def deserialize(v: Json): Long = v match {
+    def deserialize(v: JsValue): Long = v match {
       case JsNumber(v) => v.toLong
 
       case _ => error("Expected Long but found: " + v)
@@ -58,9 +56,9 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
   }
 
   implicit val DoubleSerializer: Serializer[Double] = new Serializer[Double] {
-    def serialize(v: Double): Json = JsNumber(v)
+    def serialize(v: Double): JsValue = JsNumber(v)
 
-    def deserialize(v: Json): Double = v match {
+    def deserialize(v: JsValue): Double = v match {
       case JsNumber(v) => v.toDouble
 
       case _ => error("Expected Double but found: " + v)
@@ -68,13 +66,13 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
   }
 
   implicit def ObjectSerializer[A](implicit serializer: Serializer[A]): Serializer[Iterable[(String, A)]] = new Serializer[Iterable[(String, A)]] {
-    def serialize(v: Iterable[(String, A)]): Json = JsObject(Map(v.toList.map { field =>
+    def serialize(v: Iterable[(String, A)]): JsValue = JsObject(Map(v.toList.map { field =>
       val (name, value) = field
 
       (JsString(name), serializer.serialize(value))
     }: _*))
 
-    def deserialize(v: Json): Iterable[(String, A)] = v match {
+    def deserialize(v: JsValue): Iterable[(String, A)] = v match {
       case JsObject(fields) => fields.map { field =>
         val (name, value) = field
 
@@ -86,9 +84,9 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
   }
 
   implicit def ArraySerializer[A](implicit serializer: Serializer[A]): Serializer[Iterable[A]] = new Serializer[Iterable[A]] {
-    def serialize(v: Iterable[A]): Json = JsArray(v.toList.map(serializer.serialize _))
+    def serialize(v: Iterable[A]): JsValue = JsArray(v.toList.map(serializer.serialize _))
 
-    def deserialize(v: Json): Iterable[A] = v match {
+    def deserialize(v: JsValue): Iterable[A] = v match {
       case JsArray(v) => v.map(serializer.deserialize _)
 
       case _ => error("Expected Array but found: " + v)
@@ -96,20 +94,20 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
   }
 
   implicit def OptionSerializer[A](implicit serializer: Serializer[A]): Serializer[Option[A]] = new Serializer[Option[A]] {
-    def serialize(v: Option[A]): Json = v match {
+    def serialize(v: Option[A]): JsValue = v match {
       case None => JsNull
 
       case Some(v) => serializer.serialize(v)
     }
 
-    def deserialize(v: Json): Option[A] = v match {
+    def deserialize(v: JsValue): Option[A] = v match {
       case JsNull => None
 
       case _ => Some(serializer.deserialize(v))
     }
   }
 
-  def foldJson[Z](json: Json, matcher: JsonMatcher[Z]): Z = json match {
+  def foldJson[Z](json: JsValue, matcher: JsonMatcher[Z]): Z = json match {
     case JsNull => matcher._1()
 
     case JsBoolean(v) => matcher._2(v)
