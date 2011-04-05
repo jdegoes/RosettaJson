@@ -6,7 +6,7 @@ Rosetta Json is designed to allow *library authors* to create libraries that use
 
 Rosetta Json unifies across the following Json libraries:
 
- * [BlueEyes Json](github.com/jdegoes/blueeyes)
+ * [BlueEyes Json](https://github.com/jdegoes/blueeyes)
  * Lift Json
  * Dispatch Json
 
@@ -18,7 +18,9 @@ Note: Rosetta is currently optimized for ease of supporting many Json libraries,
 
 ## Usage
 
-The core module is JsonImplementation, defined in package rosetta.json.
+First, grab the prebuilt JAR from the target directory and plop it into the "lib" directory of your project. Now you're ready to go.
+
+The core module is `JsonImplementation`, defined in package `rosetta.json`:
 
     import rosetta.json.JsonImplementation
 
@@ -39,6 +41,33 @@ You use this abstract type in your code, whether classes or traits:
 
       val json: Json = JsonNull
     }
+
+## Creation and Manipulation
+
+You can also create and pattern match against the following pseudo-types:
+
+  * JsonNull
+  * JsonLong
+  * JsonDouble
+  * JsonString
+  * JsonArray
+  * JsonObject
+
+<pre>
+json match {
+  case JsonObject(fields) => JsonObject(fields.map(_._1 != "forbidden"))
+}
+</pre>
+
+Thanks to a pimp, you may also invoke a variety of manipulation methods directly on Json values:
+
+  * `foldUp(s, f)`
+  * `foldDown(s, f)`
+  * `mapUp(f)`
+  * `mapDown(f)`
+  * `get("foo.bar")`
+
+These methods are sufficient for the majority of library authors. If you need additional methods, you can usually define them in terms of one of the folds (send me a patch!).
 
 ## Serialization
 
@@ -73,33 +102,6 @@ With a little help from rosetta.io.Serializers, you can go all the way to bytes:
     implicit val JsonToByteArray = JsonToString >>> StringToArrayByte("UTF-8")
 
     val bytes = JsonNull.serialize[Array[Byte]]
-
-## Manipulation
-
-You can also create and pattern match against the following pseudo-types:
-
-  * JsonNull
-  * JsonLong
-  * JsonDouble
-  * JsonString
-  * JsonArray
-  * JsonObject
-
-<pre>
-json match {
-  case JsonObject(fields) => JsonObject(fields.map(_._1 != "forbidden"))
-}
-</pre>
-
-Thanks to a pimp, you may also invoke a variety of methods directly on Json values:
-
-  * foldUp
-  * foldDown
-  * mapUp
-  * mapDown
-  * get
-
-These methods are sufficient for the majority of library authors. If you need additional methods, you can usually define them in terms of one of the folds, and if you find the same pattern frequently, please contact me and I'll get back to you.
 
 ## Team
 
