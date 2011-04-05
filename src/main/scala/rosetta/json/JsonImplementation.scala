@@ -139,14 +139,14 @@ trait JsonImplementation[Json] extends SerializerImplicits {
   object JsonArray {
     def apply(v: Iterable[Json]): Json = v.serialize[Json]
 
-    def unapply(json: Json): Option[Iterable[Json]] = foldJson[Option[Iterable[Json]]](json,
+    def unapply(json: Json): Option[List[Json]] = foldJson[Option[List[Json]]](json,
       (
         () => None,
         _ => None,
         _ => None,
         _ => None,
         _ => None,
-        v => Some(v),
+        v => Some(v.toList),
         _ => None
       )
     )
