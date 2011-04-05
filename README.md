@@ -35,7 +35,7 @@ You use this abstract type in your code, whether classes or traits:
     }
 
     trait MyJsonTrait[Json] {
-      def jsonImplementation: JsonImplementation[Json]
+      val jsonImplementation: JsonImplementation[Json]
 
       import jsonImplementation._
 
@@ -87,7 +87,7 @@ The supported Scala types are listed below:
   * Double
   * Option of any supported type
   * Iterable of any supported type
-  * Iterable of [String, any supported type]
+  * Iterable of (String, any supported type)
 
 In addition, Rosetta Json allows you to convert between Json and String:
 

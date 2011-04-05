@@ -65,5 +65,11 @@ trait SerializerImplicits {
   implicit final def anyToDeserializable[B](b: B) = new {
     def deserialize[A](implicit s: Serializer[A, B]): A = s.deserialize(b)
   }
+
+  implicit def identitySerializer[A] = new Serializer[A, A] {
+    def serialize(v: A): A = v
+
+    def deserialize(v: A): A = v
+  }
 }
 object SerializerImplicits extends SerializerImplicits

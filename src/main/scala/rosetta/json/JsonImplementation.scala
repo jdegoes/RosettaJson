@@ -29,15 +29,15 @@ trait JsonImplementation[Json] extends SerializerImplicits {
   type JsonSerializer[A] = Serializer[A, Json]
 
   // *************** BEGIN IMPLEMENTATION ***************
-  implicit val JsonToString: Serializer[Json, String]
+  implicit def JsonToString: Serializer[Json, String]
 
-  implicit val BooleanToJson: JsonSerializer[Boolean]
+  implicit def BooleanToJson: JsonSerializer[Boolean]
 
-  implicit val StringToJson: JsonSerializer[String]
+  implicit def StringToJson: JsonSerializer[String]
 
-  implicit val LongToJson: JsonSerializer[Long]
+  implicit def LongToJson: JsonSerializer[Long]
 
-  implicit val DoubleToJson: JsonSerializer[Double]
+  implicit def DoubleToJson: JsonSerializer[Double]
 
   implicit def ObjectToJson[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Iterable[(String, A)]]
 
@@ -48,21 +48,17 @@ trait JsonImplementation[Json] extends SerializerImplicits {
   def foldJson[Z](json: Json, matcher: JsonMatcher[Z]): Z
 
   // *************** END IMPLEMENTATION ***************
-  implicit val JsonToJson: JsonSerializer[Json] = new JsonSerializer[Json] {
-    def serialize(v: Json): Json = v
+  def JsonToJson: JsonSerializer[Json] = implicitly[JsonSerializer[Json]]
 
-    def deserialize(v: Json): Json = v
-  }
-
-  val EmptyObject = ObjectToJson[Boolean].serialize(Nil)
-  val EmptyArray  = ArrayToJson[Boolean].serialize(Nil)
+  lazy val EmptyObject = (Map.empty[String, String]: Iterable[(String, String)]).serialize[Json]
+  lazy val EmptyArray  = (Nil: Iterable[String]).serialize[Json]
 
   type JsonMatcher[Z] = (() => Z, Boolean => Z, Long => Z, Double => Z, String => Z, Iterable[Json] => Z, Iterable[(String, Json)] => Z)
 
   implicit final def jsonToPimpedType(json: Json): PimpedJson = new PimpedJson(json)
   implicit final def pimpedTypeToJson(pimp: PimpedJson): Json = pimp.value
 
-  val JsonNull = OptionToJson[Boolean].serialize(None)
+  lazy val JsonNull: Json = (None: Option[Boolean]).serialize[Json]
 
   object JsonBool {
     def apply(v: Boolean) = v.serialize
