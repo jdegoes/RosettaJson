@@ -29,13 +29,13 @@ abstract class JsonTest[Json] extends Properties("Json") with ArbitraryJson[Json
   import jsonImplementation._
 
   def invertibleSerializationForAllJson = {
-    property("invertible serialization") = forAll { (json: Json) =>
+    property("invertible serialization for all json values") = forAll { (json: Json) =>
       json.serialize[String].deserialize[Json] == json
     }
   }
 
   def invertibleSerializationForObjectsAndArrays = {
-    property("invertible serialization") = forAll(genJsonObjectOrJsonArray) { (json: Json) =>
+    property("invertible serialization for objects and arrays") = forAll(genJsonObjectOrJsonArray) { (json: Json) =>
       json.serialize[String].deserialize[Json] == json
     }
   }

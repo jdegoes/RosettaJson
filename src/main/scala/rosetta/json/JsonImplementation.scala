@@ -50,6 +50,18 @@ trait JsonImplementation[Json] extends SerializerImplicits {
   // *************** END IMPLEMENTATION ***************
   def JsonToJson: JsonSerializer[Json] = implicitly[JsonSerializer[Json]]
 
+  implicit def ObjectAsMapToJson[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Map[String, A]] = new JsonSerializer[Map[String, A]] {
+    def serialize(v: Map[String, A]): Json = ObjectToJson[A].serialize(v)
+
+    def deserialize(v: Json): Map[String, A] = ObjectToJson[A].deserialize(v).toMap
+  }
+
+  implicit def ArrayAsListToJson[A](implicit serializer: JsonSerializer[A]): JsonSerializer[List[A]] = new JsonSerializer[List[A]] {
+    def serialize(v: List[A]): Json = ArrayToJson[A].serialize(v)
+
+    def deserialize(v: Json): List[A] = ArrayToJson[A].deserialize(v).toList
+  }
+
   lazy val EmptyObject = (Map.empty[String, String]: Iterable[(String, String)]).serialize[Json]
   lazy val EmptyArray  = (Nil: Iterable[String]).serialize[Json]
 

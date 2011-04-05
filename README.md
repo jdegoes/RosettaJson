@@ -95,13 +95,15 @@ In addition, Rosetta Json allows you to convert between Json and String:
 
     val json = string.deserialize[Json]
 
-With a little help from rosetta.io.Serializers, you can go all the way to bytes:
+With a little help from rosetta.io.Serializers, you can go all the way to or from bytes:
 
     import rosetta.io.Serializers.StringToArrayByte
 
     implicit val JsonToByteArray = JsonToString >>> StringToArrayByte("UTF-8")
 
     val bytes = JsonNull.serialize[Array[Byte]]
+
+    val json = bytes.deserialize[Json]
 
 ## Team
 
