@@ -37,7 +37,7 @@ trait ArbitraryJson[Json] {
 
   def genJson: Gen[Json] = oneOf(genJsonNull, genJsonString, genJsonLong, genJsonDouble, genJsonArray, genJsonObject)
 
-  def genJsonObjectOrJsonArray: Gen[Json] = oneOf(genJsonArray, genJsonObject)
+  def genJsonObjectOrJsonArray: Gen[Json] = oneOf(genJsonArray, genJsonObjectIdentifierName)
 
   def genJsonNull: Gen[Json] = {
     value(JsonNull)
@@ -77,10 +77,24 @@ trait ArbitraryJson[Json] {
     } yield (prefix + suffix, value)
   }
 
+  def genJsonFieldIdentifierName: Gen[(String, Json)] = {
+    for {
+      name  <- identifier
+      value <- arbitrary[Json]
+    } yield (name, value)
+  }
+
   def genJsonObject: Gen[Json] = {
     for {
       size   <- chooseNum(1, MaxSize)
       fields <- listOfN(size, genJsonField)
+    } yield JsonObject(fields)
+  }
+
+  def genJsonObjectIdentifierName: Gen[Json] = {
+    for {
+      size   <- chooseNum(1, MaxSize)
+      fields <- listOfN(size, genJsonFieldIdentifierName)
     } yield JsonObject(fields)
   }
 }
