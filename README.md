@@ -44,9 +44,7 @@ You use this abstract type in your code, whether classes or traits:
 
 Rosetta Json implementations support serialization of basic Scala data structures into the Json library types. Using the typeclass pattern, you can easily convert either from Scala types to Json, or from Json to Scala types:
 
-    import implicitly[JsonImplementation[Json]]._
-
-    val json = Map("foo" -> 123L).serialize
+    val json = Map("foo" -> 123L).serialize[Json]
 
     val object = json.deserialize[Iterable[(String, Long)]]
 
@@ -62,6 +60,20 @@ The supported Scala types are listed below:
   * Iterable of any supported type
   * Iterable of [String, any supported type]
 
+In addition, Rosetta Json allows you to convert between Json and String:
+
+    val string = JsonNull.serialize[String]
+
+    val json = string.deserialize[Json]
+
+With a little help from rosetta.io.Serializers, you can go all the way to bytes:
+
+    import rosetta.io.Serializers.StringToArrayByte
+
+    implicit val JsonToByteArray = JsonToString >>> StringToArrayByte("UTF-8")
+
+    val bytes = JsonNull.serialize[Array[Byte]]
+
 ## Manipulation
 
 You can also create and pattern match against the following pseudo-types:
@@ -72,6 +84,10 @@ You can also create and pattern match against the following pseudo-types:
   * JsonString
   * JsonArray
   * JsonObject
+
+    json match {
+      case JsonObject(fields) => JsonObject(fields.map(_._1 != "forbidden"))
+    }
 
 Thanks to a pimp, you may also invoke a variety of methods directly on Json values:
 

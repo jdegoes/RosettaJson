@@ -42,13 +42,13 @@ trait Serializer[A, B] { self =>
 }
 
 trait Serializers {
-  def StringToByteArray(charset: String) = new Serializer[String, Array[Byte]] {
+  def StringToArrayByte(charset: String) = new Serializer[String, Array[Byte]] {
     def serialize(v: String): Array[Byte] = v.getBytes(charset)
 
     def deserialize(v: Array[Byte]): String = new String(v, charset)
   }
 
-  implicit val UTF8StringToByteArray = StringToByteArray("UTF-8")
+  implicit val UTF8StringToArrayByte = StringToArrayByte("UTF-8")
 }
 object Serializers extends Serializers
 
