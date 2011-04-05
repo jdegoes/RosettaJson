@@ -6,11 +6,15 @@ Rosetta Json is designed to allow *library authors* to create libraries that use
 
 Rosetta Json unifies across the following Json libraries:
 
- * BlueEyes Json
+ * [BlueEyes Json](github.com/jdegoes/blueeyes)
  * Lift Json
  * Dispatch Json
 
-Rosetta does not wrap these types, which is an important distinction. Rather, libraries which use Rosetta Json will *natively* use any of the above Json types, without any changes to source code.
+Rosetta does not wrap these types, which is an important distinction. Rather, libraries which use Rosetta Json will *natively* use any of the above Json types, without any changes to source code. This means users of your Rosetta-based libraries don't need to perform type conversions, because your library will automatically accept and return the same types used by their Json library of choice.
+
+Rosetta makes it very easy to support new Json libraries - only about 10 values / methods need to be defined to support a new implementation.
+
+Note: Rosetta is currently optimized for ease of supporting many Json libraries, not speed. In particular, it makes almost no assumptions about the underlying Json implementation. As a result, it's possible to create a Json implementation which stores Json values in String fragments. With this generality and ease of implementation comes a slight performance penalty, since Rosetta does not distinguish at the type level between different Json values, but instead relies on folds to extract "type" information.
 
 ## Usage
 
@@ -28,8 +32,10 @@ You use this abstract type in your code, whether classes or traits:
       val json: Json = JsonNull
     }
 
-    trait MyJsonTrait[Json: JsonImplementation] {
-      import implicitly[JsonImplementation[Json]]._
+    trait MyJsonTrait[Json] {
+      def jsonImplementation: JsonImplementation[Json]
+
+      import jsonImplementation._
 
       val json: Json = JsonNull
     }
@@ -45,6 +51,16 @@ Rosetta Json implementations support serialization of basic Scala data structure
     val object = json.deserialize[Iterable[(String, Long)]]
 
 This allows you to create Json in an abstract, type-independent, and type-safe way.
+
+The supported Scala types are listed below:
+
+  * Boolean
+  * String
+  * Long
+  * Double
+  * Option of any supported type
+  * Iterable of any supported type
+  * Iterable of [String, any supported type]
 
 ## Manipulation
 
@@ -74,12 +90,12 @@ Rosetta Json is currently maintained by me (John A. De Goes). If you are interes
 <table>
   <thead>
     <tr>
-      <td>Name</td>               <td>Role</td>                                                                    <td>Twitter</td>
+      <td>Name</td>               <td>Role</td>       <td>Twitter</td>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>John A. De Goes</td>    <td>Author</td>                                    <td><a href="http://twitter.com/jdegoes">@jdegoes</a></td>
+      <td>John A. De Goes</td>    <td>Author</td>     <td><a href="http://twitter.com/jdegoes">@jdegoes</a></td>
     </tr>
   </tbody>
 </table>
