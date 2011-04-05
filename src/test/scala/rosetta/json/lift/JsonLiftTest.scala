@@ -18,25 +18,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package rosetta.json
+package rosetta.json.lift
 
-import org.scalacheck._
-import Gen._
-import Prop.{forAll}
-import Arbitrary.arbitrary
+import net.liftweb.json.JsonAST._
 
-abstract class JsonTest[Json] extends Properties("Json") with ArbitraryJson[Json] {
+import rosetta.json._
+import rosetta.json.lift._
+
+object JsonLiftTest extends JsonTest[JValue] {
+  val jsonImplementation = JsonLift
+
   import jsonImplementation._
 
-  def invertibleSerializationForAllJson = {
-    property("invertible serialization") = forAll { (json: Json) =>
-      json.serialize[String].deserialize[Json] == json
-    }
-  }
-
-  def invertibleSerializationForObjectsAndArrays = {
-    property("invertible serialization") = forAll(genJsonObjectOrJsonArray) { (json: Json) =>
-      json.serialize[String].deserialize[Json] == json
-    }
-  }
+  invertibleSerializationForObjectsAndArrays
 }

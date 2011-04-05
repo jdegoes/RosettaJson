@@ -125,7 +125,7 @@ trait JsonImplementation[Json] extends SerializerImplicits {
   }
 
   object JsonArray {
-    def apply(v: Iterable[Json]): Json = v.serialize
+    def apply(v: Iterable[Json]): Json = v.serialize[Json]
 
     def unapply(json: Json): Option[Iterable[Json]] = foldJson[Option[Iterable[Json]]](json,
       (
@@ -141,7 +141,7 @@ trait JsonImplementation[Json] extends SerializerImplicits {
   }
 
   object JsonObject {
-    def apply(v: Iterable[(String, Json)]): Json = v.serialize
+    def apply(v: Iterable[(String, Json)]): Json = v.serialize[Json]
 
     def unapply(json: Json): Option[Iterable[(String, Json)]] = foldJson[Option[Iterable[(String, Json)]]](json,
       (

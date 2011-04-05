@@ -18,7 +18,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package rosetta.json.dispatch
+package rosetta.json.lift
 
 import rosetta.json._
 

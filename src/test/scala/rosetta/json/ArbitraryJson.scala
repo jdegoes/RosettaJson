@@ -27,17 +27,17 @@ import Arbitrary.arbitrary
 trait ArbitraryJson[Json] {
   val jsonImplementation: JsonImplementation[Json]
 
-  val MaxSize = 4
+  val MaxSize = 3
 
   import jsonImplementation._
 
-  implicit lazy val arbJson: Arbitrary[Json] = Arbitrary {
+  implicit def arbJson: Arbitrary[Json] = Arbitrary {
     genJson
   }
 
-  def genJson: Gen[Json] = {
-    oneOf(genJsonNull, genJsonString, genJsonLong, genJsonDouble, genJsonArray, genJsonObject)
-  }
+  def genJson: Gen[Json] = oneOf(genJsonNull, genJsonString, genJsonLong, genJsonDouble, genJsonArray, genJsonObject)
+
+  def genJsonObjectOrJsonArray: Gen[Json] = oneOf(genJsonArray, genJsonObject)
 
   def genJsonNull: Gen[Json] = {
     value(JsonNull)
@@ -45,8 +45,9 @@ trait ArbitraryJson[Json] {
 
   def genJsonString: Gen[Json] = {
     for {
-      string <- arbitrary[String]
-    } yield JsonString(string)
+      prefix <- identifier
+      suffix <- arbitrary[String]
+    } yield JsonString(prefix + suffix)
   }
 
   def genJsonLong: Gen[Json] = {
@@ -62,12 +63,10 @@ trait ArbitraryJson[Json] {
   }
 
   def genJsonArray: Gen[Json] = {
-    Gen.sized { size =>
-      for {
-        size     <- chooseNum(1, size.min(MaxSize))
-        elements <- listOfN(size, arbitrary[Json])
-      } yield JsonArray(elements)
-    }
+    for {
+      size     <- chooseNum(1, MaxSize)
+      elements <- listOfN(size, arbitrary[Json])
+    } yield JsonArray(elements)
   }
 
   def genJsonField: Gen[(String, Json)] = {
@@ -78,11 +77,9 @@ trait ArbitraryJson[Json] {
   }
 
   def genJsonObject: Gen[Json] = {
-    Gen.sized { size =>
-      for {
-        size   <- chooseNum(1, size.min(MaxSize))
-        fields <- listOfN(size, genJsonField)
-      } yield JsonObject(fields)
-    }
+    for {
+      size   <- chooseNum(1, MaxSize)
+      fields <- listOfN(size, genJsonField)
+    } yield JsonObject(fields)
   }
 }

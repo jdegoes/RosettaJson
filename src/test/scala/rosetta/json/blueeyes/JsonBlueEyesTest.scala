@@ -28,5 +28,5 @@ import rosetta.json.blueeyes._
 object JsonBlueEyesTest extends JsonTest[JValue] {
   val jsonImplementation = JsonBlueEyes
 
-  defineProperties
+  invertibleSerializationForAllJson
 }
