@@ -62,6 +62,18 @@ trait JsonImplementation[Json] extends SerializerImplicits {
     def deserialize(v: Json): List[A] = ArrayToJson[A].deserialize(v).toList
   }
 
+  implicit lazy val IntToJson = new JsonSerializer[Int] {
+    def serialize(v: Int): Json = LongToJson.serialize(v.toLong)
+
+    def deserialize(v: Json): Int = LongToJson.deserialize(v).toInt
+  }
+
+  implicit lazy val FloatToJson = new JsonSerializer[Float] {
+    def serialize(v: Float): Json = DoubleToJson.serialize(v.toDouble)
+
+    def deserialize(v: Json): Float = DoubleToJson.deserialize(v).toFloat
+  }
+
   lazy val EmptyObject = (Map.empty[String, String]: Iterable[(String, String)]).serialize[Json]
   lazy val EmptyArray  = (Nil: Iterable[String]).serialize[Json]
 
