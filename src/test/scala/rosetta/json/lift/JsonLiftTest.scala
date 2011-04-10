@@ -30,6 +30,8 @@ object JsonLiftTest extends JsonTest[JValue] {
 
   tuplesCanBeSerialized
 
+  basicCollectionsCanBeSerialized
+
   invertibleSerializationForObjectsAndArrays
 
   getForAllObjects

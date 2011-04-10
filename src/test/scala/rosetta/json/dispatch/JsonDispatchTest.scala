@@ -30,6 +30,8 @@ object JsonDispatchTest extends JsonTest[JsValue] {
 
   tuplesCanBeSerialized
 
+  basicCollectionsCanBeSerialized
+
   invertibleSerializationForAllJson
 
   getForAllObjects

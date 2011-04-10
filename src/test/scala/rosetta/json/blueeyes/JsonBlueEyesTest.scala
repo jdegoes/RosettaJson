@@ -30,6 +30,8 @@ object JsonBlueEyesTest extends JsonTest[JValue] {
 
   tuplesCanBeSerialized
 
+  basicCollectionsCanBeSerialized
+
   invertibleSerializationForAllJson
 
   getForAllObjects
