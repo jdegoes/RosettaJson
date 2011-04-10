@@ -28,6 +28,8 @@ import rosetta.json.lift._
 object JsonLiftTest extends JsonTest[JValue] {
   val jsonImplementation = JsonLift
 
+  tuplesCanBeSerialized
+
   invertibleSerializationForObjectsAndArrays
 
   getForAllObjects

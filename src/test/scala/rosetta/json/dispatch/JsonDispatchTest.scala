@@ -28,6 +28,8 @@ import rosetta.json.dispatch._
 object JsonDispatchTest extends JsonTest[JsValue] {
   val jsonImplementation = JsonDispatch
 
+  tuplesCanBeSerialized
+
   invertibleSerializationForAllJson
 
   getForAllObjects

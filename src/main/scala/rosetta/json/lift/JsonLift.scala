@@ -32,7 +32,7 @@ trait JsonLift extends JsonImplementation[JValue] {
   val JsonToString: rosetta.io.Serializer[JValue, String] = new rosetta.io.Serializer[JValue, String] {
     def serialize(v: JValue): String = compact(render(v))
 
-    def deserialize(v: String): JValue = parse(v)
+    def deserialize(v: String): JValue = if (v.trim.length == 0) JNothing else parse(v)
   }
 
   implicit val BooleanToJson: JsonSerializer[Boolean] = new JsonSerializer[Boolean] {

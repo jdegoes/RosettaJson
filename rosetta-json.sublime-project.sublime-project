@@ -7,10 +7,107 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/JsonImplementation.scala",
+			"settings":
+			{
+				"buffer_size": 9435,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/blueeyes/JsonBlueEyes.scala",
+			"settings":
+			{
+				"buffer_size": 4513,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/lift/JsonLift.scala",
+			"settings":
+			{
+				"buffer_size": 4618,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/dispatch/JsonDispatch.scala",
+			"settings":
+			{
+				"buffer_size": 4621,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/John/Documents/github/rosetta-json/README.md",
+			"settings":
+			{
+				"buffer_size": 4531,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/John/Documents/github/rosetta-json/project/build/RosettaJsonProject.scala",
+			"settings":
+			{
+				"buffer_size": 1607,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/ArbitraryJson.scala",
+			"settings":
+			{
+				"buffer_size": 2919,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/JsonTest.scala",
+			"settings":
+			{
+				"buffer_size": 2383,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/blueeyes/JsonBlueEyesTest.scala",
+			"settings":
+			{
+				"buffer_size": 1430,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/dispatch/JsonDispatchTest.scala",
+			"settings":
+			{
+				"buffer_size": 1423,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/lift/JsonLiftTest.scala",
+			"settings":
+			{
+				"buffer_size": 1426,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"file_history":
 	[
+		"/Users/John/Documents/github/rosetta-json/LICENSE",
+		"/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/io/Serializer.scala",
+		"/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/ArbitraryJson",
+		"/Users/John/Documents/github/rosetta-json/README",
+		"/Users/John/Documents/github/rosetta-json/project/build/RosettaJsonProject.scala",
+		"/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/blueeyes/JsonBlueEyes",
+		"/Users/John/Documents/github/rosetta-json/project/build/RosettaJsonProject",
+		"/Users/John/Documents/github/rosetta-json/project/build.properties",
+		"/Users/John/Library/Application Support/Sublime Text 2/Packages/Scala/Scala.tmLanguage"
 	],
 	"find_in_files":
 	{
@@ -23,16 +120,43 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"val",
+			"genitrary",
+			"arb",
+			"jsonImplementation",
+			"IdentityToJson",
+			"\\b(\\w+)JsonSerializer",
+			"JsonStringSerializer",
+			"Map",
+			"serialize[Json]",
+			".serialize",
+			"\\b((?!Json)\\w\\w+)Serializer\\b",
+			"\\bSerializer\\b",
+			"JsonSerializer",
+			"\\bJson\\b",
+			"Json",
+			"{",
+			"extends"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": false,
+		"regex": true,
 		"replace_history":
 		[
+			"arbitrary",
+			"gen",
+			"JsonToJson",
+			"$1ToJson",
+			"JsonToString",
+			"serialize",
+			"$1JsonSerializer",
+			"JsonSerializer",
+			"IdentitySerializer",
+			"JsValue"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -50,8 +174,311 @@
 	"groups":
 	[
 		{
+			"selected": 5,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/JsonImplementation.scala",
+					"settings":
+					{
+						"buffer_size": 9435,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6359,
+								6359
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0,
+						"translation.y": 3711,
+						"zoom_level": 1
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/blueeyes/JsonBlueEyes.scala",
+					"settings":
+					{
+						"buffer_size": 4513,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3883,
+								3883
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0,
+						"translation.y": 0,
+						"zoom_level": 1
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/lift/JsonLift.scala",
+					"settings":
+					{
+						"buffer_size": 4618,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2950,
+								2950
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0,
+						"translation.y": 0,
+						"zoom_level": 1
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/dispatch/JsonDispatch.scala",
+					"settings":
+					{
+						"buffer_size": 4621,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								915,
+								915
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0,
+						"translation.y": 1110,
+						"zoom_level": 1
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/Users/John/Documents/github/rosetta-json/README.md",
+					"settings":
+					{
+						"buffer_size": 4531,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2735,
+								2735
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0,
+						"translation.y": 0,
+						"zoom_level": 1
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/Users/John/Documents/github/rosetta-json/project/build/RosettaJsonProject.scala",
+					"settings":
+					{
+						"buffer_size": 1607,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1607,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0,
+						"translation.y": 0,
+						"zoom_level": 1
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/ArbitraryJson.scala",
+					"settings":
+					{
+						"buffer_size": 2919,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1581,
+								1581
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0,
+						"translation.y": 0,
+						"zoom_level": 1
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/JsonTest.scala",
+					"settings":
+					{
+						"buffer_size": 2383,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1953,
+								1953
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0,
+						"translation.y": 0,
+						"zoom_level": 1
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/blueeyes/JsonBlueEyesTest.scala",
+					"settings":
+					{
+						"buffer_size": 1430,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1428,
+								1428
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage"
+						},
+						"translation.x": 0,
+						"translation.y": 0,
+						"zoom_level": 1
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/dispatch/JsonDispatchTest.scala",
+					"settings":
+					{
+						"buffer_size": 1423,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1421,
+								1421
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage"
+						},
+						"translation.x": 0,
+						"translation.y": 0,
+						"zoom_level": 1
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/lift/JsonLiftTest.scala",
+					"settings":
+					{
+						"buffer_size": 1426,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1361,
+								1361
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage"
+						},
+						"translation.x": 0,
+						"translation.y": 0,
+						"zoom_level": 1
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -98,6 +525,6 @@
 	"show_minimap": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150,
+	"side_bar_width": 282,
 	"status_bar_visible": true
 }

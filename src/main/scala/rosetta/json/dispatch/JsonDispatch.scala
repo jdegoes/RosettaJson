@@ -28,7 +28,7 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
   val JsonToString: rosetta.io.Serializer[JsValue, String] = new rosetta.io.Serializer[JsValue, String] {
     def serialize(v: JsValue): String = JsValue.toJson(v)
 
-    def deserialize(v: String): JsValue = JsValue.fromString(v)
+    def deserialize(v: String): JsValue = if (v.trim.length == 0) JsNull else JsValue.fromString(v)
   }
 
   implicit val BooleanToJson: JsonSerializer[Boolean] = new JsonSerializer[Boolean] {

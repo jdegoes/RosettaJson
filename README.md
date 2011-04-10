@@ -66,6 +66,8 @@ Thanks to a pimp, you may also invoke a variety of manipulation methods directly
   * `mapUp(f)`
   * `mapDown(f)`
   * `get("foo.bar")`
+  * `++ (j)`
+  * `merge(j)`
 
 These methods are sufficient for the majority of library authors. If you need additional methods, you can usually define them in terms of one of the folds (send me a patch!).
 
@@ -75,7 +77,7 @@ Rosetta Json implementations support serialization of basic Scala data structure
 
     val json = Map("foo" -> 123L).serialize[Json]
 
-    val object = json.deserialize[Iterable[(String, Long)]]
+    val object = json.deserialize[Map[String, Long]]
 
 This allows you to create Json in an abstract, type-independent, and type-safe way.
 
@@ -83,11 +85,11 @@ The supported Scala types are listed below:
 
   * Boolean
   * String
-  * Long
-  * Double
+  * Int, Long
+  * Float, Double
   * Option of any supported type
-  * Iterable of any supported type
-  * Iterable of (String, any supported type)
+  * Tuples of arity up to 5
+  * Lists, Maps, Sets, and Iterables of any supported type
 
 In addition, Rosetta Json allows you to convert between Json and String:
 

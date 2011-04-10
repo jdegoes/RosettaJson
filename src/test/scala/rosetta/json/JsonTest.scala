@@ -40,6 +40,24 @@ abstract class JsonTest[Json] extends Properties("Json") with ArbitraryJson[Json
     }
   }
 
+  def tuplesCanBeSerialized {
+    property("tuple 2s can be serialized") = forAll { (tuple: (String, String)) =>
+      tuple.serialize[Json].deserialize[(String, String)] == tuple
+    }
+
+    property("tuple 3s can be serialized") = forAll { (tuple: (String, String, String)) =>
+      tuple.serialize[Json].deserialize[(String, String, String)] == tuple
+    }
+
+    property("tuple 4s can be serialized") = forAll { (tuple: (String, String, String, String)) =>
+      tuple.serialize[Json].deserialize[(String, String, String, String)] == tuple
+    }
+
+    property("tuple 5s can be serialized") = forAll { (tuple: (String, String, String, String, String)) =>
+      tuple.serialize[Json].deserialize[(String, String, String, String, String)] == tuple
+    }
+  }
+
   def getForAllObjects = {
     property("get for all objects") = forAll(genJsonObject) { (json: Json) =>
       json match {
