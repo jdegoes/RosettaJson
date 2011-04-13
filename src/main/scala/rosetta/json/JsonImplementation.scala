@@ -292,19 +292,22 @@ trait JsonImplementation[Json] extends SerializerImplicits {
      * json.get(".foo.baz")
      * }}}
      */
-    def get(name: String): Json = name.split("[.]").toList.filter(_.length > 0) match {
-      case Nil => value
+    def get(name: String): Json = {
+      def get0(path: List[String], json: Json): Json = path match {
+        case Nil => json
 
-      case f :: fs =>
-        value match {
+        case p :: ps => json match {
           case JsonObject(map) =>
-            map.get(name) match {
+            map.get(p) match {
               case None        => JsonNull
-              case Some(value) => value.get(fs.mkString("."))
+              case Some(value) => get0(ps, value)
             }
 
           case _ => JsonNull
         }
+      }
+
+      get0(name.split("[.]").toList.filter(_.length > 0), value)
     }
 
     /** Concatenation monoid. Wraps either side in an array unless either

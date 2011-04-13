@@ -79,7 +79,7 @@ abstract class JsonTest[Json] extends Properties("Json") with ArbitraryJson[Json
           map.foldLeft(true == true) { (props, tuple) =>
             val (name, value) = tuple
 
-            props && (json.get(name) == value)
+            props && (json.get("." + name) == value)
           }
       }
     }
