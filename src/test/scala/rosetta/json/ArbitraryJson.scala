@@ -22,6 +22,8 @@ package rosetta.json
 
 import org.scalacheck._
 import Gen._
+import Shrink._
+import util.Buildable._
 import Arbitrary.arbitrary
 
 trait ArbitraryJson[Json] {
@@ -30,6 +32,26 @@ trait ArbitraryJson[Json] {
   val MaxSize = 3
 
   import jsonImplementation._
+
+  implicit lazy val shrinkJValue: Shrink[Json] = Shrink[Json] { json =>
+    def projection[A](list: List[A]): Traversable[A] = list
+
+    json match {
+      case JsonObject(fields) =>
+        val shrinker: Shrink[List[(String, Json)]] = 
+          shrinkContainer(projection, shrinkTuple2(shrinkString, shrinkJValue), buildableList)
+
+        shrinker.shrink(fields.toList).map(fields => JsonObject(fields))
+
+      case JsonArray(elements) =>
+        val shrinker: Shrink[List[Json]] = 
+          shrinkContainer(projection, shrinkJValue, buildableList)
+
+        shrinker.shrink(elements).map(elements => JsonArray(elements))
+
+      case _ => Stream.empty[Json]
+    }
+  }
 
   implicit def arbJson: Arbitrary[Json] = Arbitrary {
     genJson

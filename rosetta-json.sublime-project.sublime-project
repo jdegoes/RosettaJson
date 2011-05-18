@@ -11,7 +11,7 @@
 			"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/JsonImplementation.scala",
 			"settings":
 			{
-				"buffer_size": 9435,
+				"buffer_size": 20228,
 				"line_ending": "Unix"
 			}
 		},
@@ -19,7 +19,7 @@
 			"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/blueeyes/JsonBlueEyes.scala",
 			"settings":
 			{
-				"buffer_size": 4513,
+				"buffer_size": 4551,
 				"line_ending": "Unix"
 			}
 		},
@@ -27,7 +27,7 @@
 			"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/lift/JsonLift.scala",
 			"settings":
 			{
-				"buffer_size": 4618,
+				"buffer_size": 4656,
 				"line_ending": "Unix"
 			}
 		},
@@ -35,23 +35,7 @@
 			"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/dispatch/JsonDispatch.scala",
 			"settings":
 			{
-				"buffer_size": 4621,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Users/John/Documents/github/rosetta-json/README.md",
-			"settings":
-			{
-				"buffer_size": 4531,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Users/John/Documents/github/rosetta-json/project/build/RosettaJsonProject.scala",
-			"settings":
-			{
-				"buffer_size": 1607,
+				"buffer_size": 4657,
 				"line_ending": "Unix"
 			}
 		},
@@ -67,7 +51,7 @@
 			"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/JsonTest.scala",
 			"settings":
 			{
-				"buffer_size": 2383,
+				"buffer_size": 3571,
 				"line_ending": "Unix"
 			}
 		},
@@ -75,7 +59,7 @@
 			"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/blueeyes/JsonBlueEyesTest.scala",
 			"settings":
 			{
-				"buffer_size": 1430,
+				"buffer_size": 1490,
 				"line_ending": "Unix"
 			}
 		},
@@ -83,7 +67,7 @@
 			"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/dispatch/JsonDispatchTest.scala",
 			"settings":
 			{
-				"buffer_size": 1423,
+				"buffer_size": 1483,
 				"line_ending": "Unix"
 			}
 		},
@@ -91,7 +75,15 @@
 			"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/lift/JsonLiftTest.scala",
 			"settings":
 			{
-				"buffer_size": 1426,
+				"buffer_size": 1486,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/John/Documents/github/rosetta-json/project/build/RosettaJsonProject.scala",
+			"settings":
+			{
+				"buffer_size": 1607,
 				"line_ending": "Unix"
 			}
 		}
@@ -99,11 +91,12 @@
 	"build_system": "",
 	"file_history":
 	[
-		"/Users/John/Documents/github/rosetta-json/LICENSE",
+		"/Users/John/Documents/github/rosetta-json/README.md",
 		"/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/io/Serializer.scala",
+		"/Users/John/Documents/github/rosetta-json/project/build/RosettaJsonProject.scala",
+		"/Users/John/Documents/github/rosetta-json/LICENSE",
 		"/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/ArbitraryJson",
 		"/Users/John/Documents/github/rosetta-json/README",
-		"/Users/John/Documents/github/rosetta-json/project/build/RosettaJsonProject.scala",
 		"/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/blueeyes/JsonBlueEyes",
 		"/Users/John/Documents/github/rosetta-json/project/build/RosettaJsonProject",
 		"/Users/John/Documents/github/rosetta-json/project/build.properties",
@@ -123,6 +116,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"FoldFoldUp",
 			"val",
 			"genitrary",
 			"arb",
@@ -174,7 +168,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -182,15 +176,15 @@
 					"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/JsonImplementation.scala",
 					"settings":
 					{
-						"buffer_size": 9435,
+						"buffer_size": 20228,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6359,
-								6359
+								10086,
+								10086
 							]
 						],
 						"settings":
@@ -200,7 +194,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0,
-						"translation.y": 3711,
+						"translation.y": 3917,
 						"zoom_level": 1
 					},
 					"type": "text"
@@ -210,15 +204,15 @@
 					"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/blueeyes/JsonBlueEyes.scala",
 					"settings":
 					{
-						"buffer_size": 4513,
+						"buffer_size": 4551,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3883,
-								3883
+								3615,
+								3623
 							]
 						],
 						"settings":
@@ -228,7 +222,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0,
-						"translation.y": 0,
+						"translation.y": 161,
 						"zoom_level": 1
 					},
 					"type": "text"
@@ -238,15 +232,15 @@
 					"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/lift/JsonLift.scala",
 					"settings":
 					{
-						"buffer_size": 4618,
+						"buffer_size": 4656,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2950,
-								2950
+								1601,
+								1601
 							]
 						],
 						"settings":
@@ -266,15 +260,15 @@
 					"file": "/Users/John/Documents/github/rosetta-json/src/main/scala/rosetta/json/dispatch/JsonDispatch.scala",
 					"settings":
 					{
-						"buffer_size": 4621,
+						"buffer_size": 4657,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								915,
-								915
+								1419,
+								1419
 							]
 						],
 						"settings":
@@ -284,69 +278,13 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0,
-						"translation.y": 1110,
+						"translation.y": 292,
 						"zoom_level": 1
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "/Users/John/Documents/github/rosetta-json/README.md",
-					"settings":
-					{
-						"buffer_size": 4531,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2735,
-								2735
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown/Markdown.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0,
-						"translation.y": 0,
-						"zoom_level": 1
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "/Users/John/Documents/github/rosetta-json/project/build/RosettaJsonProject.scala",
-					"settings":
-					{
-						"buffer_size": 1607,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1607,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0,
-						"translation.y": 0,
-						"zoom_level": 1
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
 					"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/ArbitraryJson.scala",
 					"settings":
 					{
@@ -374,19 +312,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 5,
 					"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/JsonTest.scala",
 					"settings":
 					{
-						"buffer_size": 2383,
+						"buffer_size": 3571,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1953,
-								1953
+								2367,
+								2367
 							]
 						],
 						"settings":
@@ -396,6 +334,58 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0,
+						"translation.y": 563,
+						"zoom_level": 1
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/blueeyes/JsonBlueEyesTest.scala",
+					"settings":
+					{
+						"buffer_size": 1490,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1387,
+								1387
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage"
+						},
+						"translation.x": 0,
+						"translation.y": 0,
+						"zoom_level": 1
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/dispatch/JsonDispatchTest.scala",
+					"settings":
+					{
+						"buffer_size": 1483,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1380,
+								1380
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage"
+						},
+						"translation.x": 0,
 						"translation.y": 0,
 						"zoom_level": 1
 					},
@@ -403,18 +393,18 @@
 				},
 				{
 					"buffer": 8,
-					"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/blueeyes/JsonBlueEyesTest.scala",
+					"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/lift/JsonLiftTest.scala",
 					"settings":
 					{
-						"buffer_size": 1430,
+						"buffer_size": 1486,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1428,
-								1428
+								1227,
+								1227
 							]
 						],
 						"settings":
@@ -429,49 +419,25 @@
 				},
 				{
 					"buffer": 9,
-					"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/dispatch/JsonDispatchTest.scala",
+					"file": "/Users/John/Documents/github/rosetta-json/project/build/RosettaJsonProject.scala",
 					"settings":
 					{
-						"buffer_size": 1423,
+						"buffer_size": 1607,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1421,
-								1421
+								1569,
+								1569
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
-						},
-						"translation.x": 0,
-						"translation.y": 0,
-						"zoom_level": 1
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "/Users/John/Documents/github/rosetta-json/src/test/scala/rosetta/json/lift/JsonLiftTest.scala",
-					"settings":
-					{
-						"buffer_size": 1426,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1361,
-								1361
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage"
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0,
 						"translation.y": 0,
@@ -511,6 +477,10 @@
 		"height": 0,
 		"selected_items":
 		[
+			[
+				"seri",
+				"src/main/scala/rosetta/io/Serializer.scala"
+			]
 		],
 		"width": 0
 	},

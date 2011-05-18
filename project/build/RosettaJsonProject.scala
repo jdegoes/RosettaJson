@@ -3,7 +3,7 @@ import sbt._
 class RosettaJsonProject(info: ProjectInfo) extends DefaultProject(info) with Repositories {
   val blueeyes      = "com.github.blueeyes"     %   "blueeyes"            % "0.2.8"   % "compile"
   val dispatch_json = "net.databinder"          %%  "dispatch-http-json"  % "0.7.8"   % "compile"
-  val lift_json     = "net.liftweb"             %%  "lift-json"           % "2.2"     % "compile"
+  val lift_json     = "net.liftweb"             %%  "lift-json"           % "2.3"     % "compile"
 
   val scala_check   = "org.scala-tools.testing" %% "scalacheck"   % "1.8"   % "test"
   val specs         = "org.scala-tools.testing" %% "specs"        % "1.6.7" % "compile"
