@@ -33,21 +33,15 @@ trait ArbitraryJson[Json] {
 
   import jsonImplementation._
 
-  implicit lazy val shrinkJValue: Shrink[Json] = Shrink[Json] { json =>
-    def projection[A](list: List[A]): Traversable[A] = list
+  implicit lazy val shrinkJValue: Shrink[Json] = Shrink[Json](shrinkJson _)
 
+  def shrinkJson(json: Json): Stream[Json] = {
     json match {
       case JsonObject(fields) =>
-        val shrinker: Shrink[List[(String, Json)]] = 
-          shrinkContainer(projection, shrinkTuple2(shrinkString, shrinkJValue), buildableList)
-
-        shrinker.shrink(fields.toList).map(fields => JsonObject(fields))
+        implicitly[Shrink[List[(String, Json)]]].shrink(fields.toList).map(fields => JsonObject(fields))
 
       case JsonArray(elements) =>
-        val shrinker: Shrink[List[Json]] = 
-          shrinkContainer(projection, shrinkJValue, buildableList)
-
-        shrinker.shrink(elements).map(elements => JsonArray(elements))
+        implicitly[Shrink[List[Json]]].shrink(elements).map(elements => JsonArray(elements))
 
       case _ => Stream.empty[Json]
     }
