@@ -1,7 +1,7 @@
 import sbt._
 
 class RosettaJsonProject(info: ProjectInfo) extends DefaultProject(info) with Repositories {
-  val blueeyes      = "com.github.blueeyes"     %   "blueeyes"            % "0.2.8"   % "compile"
+  val blueeyes      = "com.github.blueeyes"     %   "blueeyes"            % "0.3.18"  % "compile"
   val dispatch_json = "net.databinder"          %%  "dispatch-http-json"  % "0.7.8"   % "compile"
   val lift_json     = "net.liftweb"             %%  "lift-json"           % "2.3"     % "compile"
 
@@ -20,5 +20,5 @@ trait Repositories {
   val JBoss           = MavenRepository("JBoss Releases",             "http://repository.jboss.org/nexus/content/groups/public/")
   val Nexus           = MavenRepository("Nexus Scala Tools",          "http://nexus.scala-tools.org/content/repositories/releases/")
   val Maven           = MavenRepository("Maven Repo 1",               "http://repo1.maven.org/maven2/")
-  val Scalable        = MavenRepository("Maven Repo 2",               "http://scalablesolutions.se/akka/repository/")
+  val Scalable        = MavenRepository("Maven Repo 2",               "http://akka.io/repository/")
 }

@@ -8,3 +8,5 @@ target/*/test-resources
 project/build/target
 project/boot
 lib_managed
+*.swp
+tags
