@@ -1,11 +1,4 @@
-target/.history
-target/*/analysis
-target/*/classes
-target/*/resources
-target/*/test-analysis
-target/*/test-classes
-target/*/test-resources
-project/build/target
+target
 project/boot
 lib_managed
 *.swp
