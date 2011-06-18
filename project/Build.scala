@@ -3,10 +3,10 @@ import Keys._
 
 object RosettaBuild extends Build {
   lazy val deps = Seq(
-    "net.databinder"          %%  "dispatch-http-json"  % "0.7.8"   % "provided",
-    "net.liftweb"             %%  "lift-json"           % "2.3"     % "provided",
-    "org.scala-tools.testing" %% "scalacheck"           % "1.8"     % "test",
-    "org.scala-tools.testing" %% "specs"                % "1.6.7"   % "test"
+    "net.databinder"          %% "dispatch-http-json"  % "0.8.3"   % "provided",
+    "net.liftweb"             %% "lift-json"           % "2.4-M2"  % "provided",
+    "org.scala-tools.testing" %% "scalacheck"          % "1.9"     % "test",
+    "org.scala-tools.testing" %% "specs"               % "1.6.8"   % "test"
   )
 
   def tryLocalGit(buildBase: java.io.File, p: Project, f: java.io.File, git: URI): Project = {
@@ -16,7 +16,7 @@ object RosettaBuild extends Build {
   }
 
   override def projectDefinitions(base: File) = tryLocalGit(base, 
-    Project("rosetta", file(".")) settings(name := "rosetta-json", organization := "com.reportgrid", libraryDependencies ++= deps),
+    Project("rosetta", file(".")) settings(name := "rosetta-json", organization := "com.reportgrid", libraryDependencies ++= deps, scalaVersion := "2.9.0-1"),
     file("../blueeyes"), 
     uri("https://github.com/jdegoes/blueeyes")) :: Nil
 }
