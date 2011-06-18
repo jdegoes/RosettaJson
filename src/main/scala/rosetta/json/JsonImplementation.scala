@@ -89,7 +89,7 @@ trait JsonImplementation[Json] extends SerializerImplicits {
     def deserialize(v: Json): (A, B) = v.deserialize[List[Json]] match {
       case a :: b :: Nil => (a.deserialize[A], b.serialize[B])
 
-      case _ => error("Expected Tuple2 (array with 2 elements) but found: " + v)
+      case _ => sys.error("Expected Tuple2 (array with 2 elements) but found: " + v)
     }
   }
 
@@ -114,7 +114,7 @@ trait JsonImplementation[Json] extends SerializerImplicits {
     def deserialize(v: Json): (A, B, C) = v.deserialize[List[Json]] match {
       case a :: b :: c :: Nil => (a.deserialize[A], b.deserialize[B], c.deserialize[C])
 
-      case _ => error("Expected Tuple3 (array with 3 elements) but found: " + v)
+      case _ => sys.error("Expected Tuple3 (array with 3 elements) but found: " + v)
     }
   }
 
@@ -134,7 +134,7 @@ trait JsonImplementation[Json] extends SerializerImplicits {
     def deserialize(v: Json): (A, B, C, D) = v.deserialize[List[Json]] match {
       case a :: b :: c :: d :: Nil => (a.deserialize[A], b.deserialize[B], c.deserialize[C], d.deserialize[D])
 
-      case _ => error("Expected Tuple4 (array with 4 elements) but found: " + v)
+      case _ => sys.error("Expected Tuple4 (array with 4 elements) but found: " + v)
     }
   }
 
@@ -156,7 +156,7 @@ trait JsonImplementation[Json] extends SerializerImplicits {
     def deserialize(v: Json): (A, B, C, D, E) = v.deserialize[List[Json]] match {
       case a :: b :: c :: d :: e :: Nil => (a.deserialize[A], b.deserialize[B], c.deserialize[C], d.deserialize[D], e.deserialize[E])
 
-      case _ => error("Expected Tuple5 (array with 5 elements) but found: " + v)
+      case _ => sys.error("Expected Tuple5 (array with 5 elements) but found: " + v)
     }
   }
 

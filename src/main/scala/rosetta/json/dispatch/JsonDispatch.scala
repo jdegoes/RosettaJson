@@ -37,7 +37,7 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
     def deserialize(v: JsValue): Boolean = v match {
       case JsBoolean(v) => v
 
-      case _ => error("Expected Boolean but found: " + v)
+      case _ => sys.error("Expected Boolean but found: " + v)
     }
   }
 
@@ -47,7 +47,7 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
     def deserialize(v: JsValue): String = v match {
       case JsString(v) => v
 
-      case _ => error("Expected String but found: " + v)
+      case _ => sys.error("Expected String but found: " + v)
     }
   }
 
@@ -57,7 +57,7 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
     def deserialize(v: JsValue): Long = v match {
       case JsNumber(v) => v.toLong
 
-      case _ => error("Expected Long but found: " + v)
+      case _ => sys.error("Expected Long but found: " + v)
     }
   }
 
@@ -67,7 +67,7 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
     def deserialize(v: JsValue): Double = v match {
       case JsNumber(v) => v.toDouble
 
-      case _ => error("Expected Double but found: " + v)
+      case _ => sys.error("Expected Double but found: " + v)
     }
   }
 
@@ -85,7 +85,7 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
         (name.self, serializer.deserialize(value))
       }
 
-      case _ => error("Expected Object but found: " + v)
+      case _ => sys.error("Expected Object but found: " + v)
     }
   }
 
@@ -95,7 +95,7 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
     def deserialize(v: JsValue): Iterable[A] = v match {
       case JsArray(v) => v.map(serializer.deserialize _)
 
-      case _ => error("Expected Array but found: " + v)
+      case _ => sys.error("Expected Array but found: " + v)
     }
   }
 
@@ -123,7 +123,7 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
     case JsArray(v)   => matcher._6(v)
     case JsObject(v)  => matcher._7(v.map(field => (field._1.self, field._2)))
 
-    case _ => error("Cannot fold over " + json)
+    case _ => sys.error("Cannot fold over " + json)
   }
 }
 object JsonDispatch extends JsonDispatch

@@ -53,7 +53,7 @@ trait JsonBlueEyes extends JsonImplementation[JValue] {
       case JDouble(v) => v.toLong
       case JInt(v)    => v.toLong
 
-      case _ => error("Expected Long but found: " + v)
+      case _ => sys.error("Expected Long but found: " + v)
     }
   }
 
@@ -64,7 +64,7 @@ trait JsonBlueEyes extends JsonImplementation[JValue] {
       case JDouble(v) => v
       case JInt(v)    => v.toDouble
 
-      case _ => error("Expected Double but found: " + v)
+      case _ => sys.error("Expected Double but found: " + v)
     }
   }
 
@@ -78,7 +78,7 @@ trait JsonBlueEyes extends JsonImplementation[JValue] {
         (field.name, serializer.deserialize(field.value))
       }
 
-      case _ => error("Expected Object but found: " + v)
+      case _ => sys.error("Expected Object but found: " + v)
     }
   }
 
@@ -88,7 +88,7 @@ trait JsonBlueEyes extends JsonImplementation[JValue] {
     def deserialize(v: JValue): Iterable[A] = v match {
       case JArray(elements) => elements.map(serializer.deserialize _)
 
-      case _ => error("Expected Array but found: " + v)
+      case _ => sys.error("Expected Array but found: " + v)
     }
   }
 
@@ -116,7 +116,7 @@ trait JsonBlueEyes extends JsonImplementation[JValue] {
     case JArray(v)  => matcher._6(v)
     case JObject(v) => matcher._7(v.map(field => (field.name, field.value)))
 
-    case _ : JField => error("Cannot fold over JField")
+    case _ : JField => sys.error("Cannot fold over JField")
   }
 }
 object JsonBlueEyes extends JsonBlueEyes
