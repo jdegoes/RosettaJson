@@ -18,14 +18,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package rosetta.json.blueeyes
+package rosetta.json
+package blueeyes
 
-import blueeyes.json.JsonAST._
-import blueeyes.json.Printer._
-import blueeyes.json.JsonParser._
-import blueeyes.json.xschema.DefaultSerialization._
-
-import rosetta.json._
+import _root_.blueeyes.json.JsonAST._
+import _root_.blueeyes.json.Printer._
+import _root_.blueeyes.json.JsonParser._
+import _root_.blueeyes.json.xschema.DefaultSerialization._
 
 trait JsonBlueEyes extends JsonImplementation[JValue] {
   val JsonToString: rosetta.io.Serializer[JValue, String] = new rosetta.io.Serializer[JValue, String] {
