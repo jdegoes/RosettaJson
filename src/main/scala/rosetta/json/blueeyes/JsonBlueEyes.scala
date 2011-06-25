@@ -118,4 +118,5 @@ trait JsonBlueEyes extends JsonImplementation[JValue] {
     case _ : JField => sys.error("Cannot fold over JField")
   }
 }
+
 object JsonBlueEyes extends JsonBlueEyes
