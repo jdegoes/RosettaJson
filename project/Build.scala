@@ -7,7 +7,7 @@ object RosettaJsonBuild extends Build {
   val buildVersion = "0.3.1"
   val buildScalaVersion = "2.9.0-1"
   
-  val blueeyes = GitAltDependency(_: java.io.File, file("../../blueeyes"),     RootProject(uri("git://github.com/jdegoes/blueeyes")))
+  val blueeyes = GitAltDependency(_: java.io.File, file("../blueeyes"), RootProject(uri("git://github.com/jdegoes/blueeyes")))
 
   override def projectDefinitions(base: File) = {
     val rosettaJson: Project = Project("rosetta-json", file(".")) settings(
