@@ -28,7 +28,7 @@ import net.liftweb.json.JsonParser._
 
 import rosetta.json._
 
-trait JsonLift extends JsonImplementation[JValue] {
+object JsonLift extends JsonImplementation[JValue] {
   val JsonToString: rosetta.io.Serializer[JValue, String] = new rosetta.io.Serializer[JValue, String] {
     def serialize(v: JValue): String = compact(render(v))
 
@@ -128,4 +128,3 @@ trait JsonLift extends JsonImplementation[JValue] {
     case _ : JField => sys.error("Cannot fold over JField")
   }
 }
-object JsonLift extends JsonLift

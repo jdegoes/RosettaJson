@@ -24,7 +24,7 @@ import dispatch.json._
 
 import rosetta.json._
 
-trait JsonDispatch extends JsonImplementation[JsValue] {
+object JsonDispatch extends JsonImplementation[JsValue] {
   val JsonToString: rosetta.io.Serializer[JsValue, String] = new rosetta.io.Serializer[JsValue, String] {
     def serialize(v: JsValue): String = JsValue.toJson(v)
 
@@ -126,4 +126,3 @@ trait JsonDispatch extends JsonImplementation[JsValue] {
     case _ => sys.error("Cannot fold over " + json)
   }
 }
-object JsonDispatch extends JsonDispatch

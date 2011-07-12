@@ -26,7 +26,7 @@ import _root_.blueeyes.json.Printer._
 import _root_.blueeyes.json.JsonParser._
 import _root_.blueeyes.json.xschema.DefaultSerialization._
 
-trait JsonBlueEyes extends JsonImplementation[JValue] {
+object JsonBlueEyes extends JsonImplementation[JValue] {
   val JsonToString: rosetta.io.Serializer[JValue, String] = new rosetta.io.Serializer[JValue, String] {
     def serialize(v: JValue): String = compact(render(v))
 
@@ -119,4 +119,3 @@ trait JsonBlueEyes extends JsonImplementation[JValue] {
   }
 }
 
-object JsonBlueEyes extends JsonBlueEyes
