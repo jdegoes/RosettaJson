@@ -50,7 +50,7 @@ trait JsonImplementation[Json] extends SerializerImplicits {
   // *************** END IMPLEMENTATION ***************
   def JsonToJson: JsonSerializer[Json] = implicitly[JsonSerializer[Json]]
 
-  implicit def MapToJson[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Map[String, A]] = new JsonSerializer[Map[String, A]] {
+  implicit def MapToJson[A: JsonSerializer]: JsonSerializer[Map[String, A]] = new JsonSerializer[Map[String, A]] {
     def serialize(v: Map[String, A]): Json = ObjectToJson[A].serialize(v)
 
     def deserialize(v: Json): Map[String, A] = ObjectToJson[A].deserialize(v).toMap

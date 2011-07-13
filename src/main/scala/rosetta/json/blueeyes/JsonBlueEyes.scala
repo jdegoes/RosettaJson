@@ -52,7 +52,7 @@ object JsonBlueEyes extends JsonImplementation[JValue] {
       case JDouble(v) => v.toLong
       case JInt(v)    => v.toLong
 
-      case _ => sys.error("Expected Long but found: " + v)
+      case _ => sys.error("Expected JDouble or JInt but found: " + v)
     }
   }
 
@@ -63,7 +63,7 @@ object JsonBlueEyes extends JsonImplementation[JValue] {
       case JDouble(v) => v
       case JInt(v)    => v.toDouble
 
-      case _ => sys.error("Expected Double but found: " + v)
+      case _ => sys.error("Expected JDouble or JInt but found: " + v)
     }
   }
 
@@ -77,7 +77,7 @@ object JsonBlueEyes extends JsonImplementation[JValue] {
         (field.name, serializer.deserialize(field.value))
       }
 
-      case _ => sys.error("Expected Object but found: " + v)
+      case _ => sys.error("Expected JObject but found: " + v)
     }
   }
 
@@ -87,7 +87,7 @@ object JsonBlueEyes extends JsonImplementation[JValue] {
     def deserialize(v: JValue): Iterable[A] = v match {
       case JArray(elements) => elements.map(serializer.deserialize _)
 
-      case _ => sys.error("Expected Array but found: " + v)
+      case _ => sys.error("Expected JArray but found: " + v)
     }
   }
 
