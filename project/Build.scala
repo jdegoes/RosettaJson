@@ -4,8 +4,8 @@ import AltDependency._
 
 object RosettaJsonBuild extends Build {
   val buildOrganization = "com.reportgrid"
-  val buildVersion = "0.3.2"
-  val buildScalaVersion = "2.9.1.RC3"
+  val buildVersion = "0.3.3"
+  val buildScalaVersion = "2.9.1"
   
   val blueeyes = GitAltDependency(_: java.io.File, file("../blueeyes"), RootProject(uri("git://github.com/jdegoes/blueeyes")))
 
