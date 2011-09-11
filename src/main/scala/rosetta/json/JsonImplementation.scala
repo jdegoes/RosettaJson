@@ -39,11 +39,11 @@ trait JsonImplementation[Json] extends SerializerImplicits {
 
   implicit def DoubleToJson: JsonSerializer[Double]
 
-  implicit def ObjectToJson[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Iterable[(String, A)]]
+  implicit def ObjectToJson[A: JsonSerializer]: JsonSerializer[Iterable[(String, A)]]
 
-  implicit def ArrayToJson[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Iterable[A]]
+  implicit def ArrayToJson[A: JsonSerializer]:  JsonSerializer[Iterable[A]]
 
-  implicit def OptionToJson[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Option[A]]
+  implicit def OptionToJson[A: JsonSerializer]: JsonSerializer[Option[A]]
 
   def foldJson[Z](json: Json, matcher: JsonMatcher[Z]): Z
 
@@ -60,6 +60,12 @@ trait JsonImplementation[Json] extends SerializerImplicits {
     def serialize(v: List[A]): Json = ArrayToJson[A].serialize(v)
 
     def deserialize(v: Json): List[A] = ArrayToJson[A].deserialize(v).toList
+  }
+
+  implicit def SeqToJson[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Seq[A]] = new JsonSerializer[Seq[A]] {
+    def serialize(v: Seq[A]): Json = ArrayToJson[A].serialize(v)
+
+    def deserialize(v: Json): Seq[A] = ArrayToJson[A].deserialize(v).toSeq
   }
 
   implicit def SetToJson[A](implicit serializer: JsonSerializer[A]): JsonSerializer[Set[A]] = new JsonSerializer[Set[A]] {
