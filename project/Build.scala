@@ -25,7 +25,8 @@ object RosettaJsonBuild extends Build {
       resolvers ++= Seq("ReportGrid repo" at                   "http://nexus.reportgrid.com/content/repositories/releases",
 			"ReportGrid snapshot repo" at          "http://nexus.reportgrid.com/content/repositories/snapshots",
 			"ReportGrid public repo" at            "http://nexus.reportgrid.com/content/repositories/public-releases",
-			"ReportGrid public snapshot repo" at   "http://nexus.reportgrid.com/content/repositories/public-snapshots"),
+			"ReportGrid public snapshot repo" at   "http://nexus.reportgrid.com/content/repositories/public-snapshots",
+		        "Typesafe repo" at                     "http://repo.typesafe.com/typesafe/releases/"),
       publishTo <<= (version) { version: String =>
         val nexus = "http://nexus.reportgrid.com/content/repositories/"
         if (version.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus+"snapshots/") 
